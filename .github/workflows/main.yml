@@ -3,11 +3,12 @@ name: Build project
 on: [push, pull_request]
 
 jobs:
-  buildForAllSupportedPlatforms:
+  #buildForAllSupportedPlatforms:
+  buildForWebPlatform:
     name: Build for ${{ matrix.targetPlatform }}
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         targetPlatform:
           #- StandaloneOSX # Build a macOS standalone (Intel 64-bit).
@@ -40,3 +41,28 @@ jobs:
         with:
           name: Build-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
+
+  deployForWebPlatform:
+    needs: buildForWebPlatform
+    name: Deploy for Web
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+      
+      - uses: actions/download-artifact@v4
+        with:
+          name: Build-WebGL
+          path: build/WebGL
+      
+      - name: display structure of the root file
+        run: ls -R
+        working-directory: build/WebGL
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: build/WebGL
+
+
