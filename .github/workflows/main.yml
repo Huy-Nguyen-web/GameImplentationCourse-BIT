@@ -12,8 +12,8 @@ jobs:
       matrix:
         targetPlatform:
           #- StandaloneOSX # Build a macOS standalone (Intel 64-bit).
-          #- StandaloneWindows # Build a Windows standalone.
-          #- StandaloneWindows64 # Build a Windows 64-bit standalone.
+          - StandaloneWindows # Build a Windows standalone.
+          - StandaloneWindows64 # Build a Windows 64-bit standalone.
           #- StandaloneLinux64 # Build a Linux 64-bit standalone.
           #- iOS # Build an iOS player.
           #- Android # Build an Android .apk standalone app.
@@ -42,27 +42,5 @@ jobs:
           name: Build-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
 
-  deployForWebPlatform:
-    needs: buildForWebPlatform
-    name: Deploy for Web
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout code
-        uses: actions/checkout@v4
-      
-      - uses: actions/download-artifact@v4
-        with:
-          name: Build-WebGL
-          path: build/WebGL
-      
-      - name: display structure of the root file
-        run: ls -R
-        working-directory: build/WebGL
-
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: build/WebGL
 
 
