@@ -285,8 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02d0ec1a486caf54aae616f8cbb77b1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomsPrefab:
-    _serializedList: []
+  roomPrefab: {fileID: 0}
   dungeonSize: {x: 0, y: 0}
 --- !u!4 &2076021291
 Transform:
