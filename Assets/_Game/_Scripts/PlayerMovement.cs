@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
 
     [SerializeField] private Transform groundCheck;
+    private SpriteRenderer sprait;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float jumpForce;
 
@@ -16,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sprait = GetComponentInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -37,15 +39,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //if (isGrounded)
-        //{
-        //    Debug.Log("isgroundede");
-        //    rb.gravityScale = 0f;
-        //}
-        //else
-        //{
-        //    rb.gravityScale = 3f;
-        //}
+        if (rb.linearVelocity.x < 0)
+        {
+            isFacingRight = false;
+            sprait.flipX = true;
+        }
+
+        if (rb.linearVelocity.x > 0)
+        {
+            isFacingRight = true;
+            sprait.flipX = false;
+        }
     }
 
 
