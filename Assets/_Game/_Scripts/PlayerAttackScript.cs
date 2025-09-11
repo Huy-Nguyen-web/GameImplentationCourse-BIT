@@ -9,6 +9,8 @@ public class PlayerAttackScript : MonoBehaviour
 
     private PlayerMovement movementScript;
 
+    [SerializeField] private Animator anim;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,7 +30,9 @@ public class PlayerAttackScript : MonoBehaviour
             {
                 Instantiate(attackHitbox, attackZoneLeft.position, Quaternion.identity);
             }
+
             recoveryTime = 1f;
+            anim.SetTrigger("Attack");
         }
 
         if (recoveryTime > 0)

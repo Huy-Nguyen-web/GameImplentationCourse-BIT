@@ -263,8 +263,9 @@ GameObject:
   m_Component:
   - component: {fileID: 156834309}
   - component: {fileID: 156834310}
+  - component: {fileID: 156834311}
   m_Layer: 0
-  m_Name: HeroKnight_0
+  m_Name: HeroKnight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -340,6 +341,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &156834311
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156834308}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 17e6e04f9096b0d47934c283e733309a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &159997324
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,6 +597,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   jumpForce: 10
+  anim: {fileID: 156834311}
 --- !u!50 &479224574
 Rigidbody2D:
   serializedVersion: 5
@@ -617,6 +641,7 @@ MonoBehaviour:
   attackZoneRight: {fileID: 1580412005}
   attackZoneLeft: {fileID: 1060943580}
   attackHitbox: {fileID: 8854627382637335180, guid: 6f27c892f2032514faa50ec940e61ed2, type: 3}
+  anim: {fileID: 156834311}
 --- !u!1 &549069408
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,7 +785,7 @@ Transform:
   m_GameObject: {fileID: 1060943579}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.62, y: 0, z: 0}
+  m_LocalPosition: {x: -1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -848,7 +873,7 @@ Transform:
   m_GameObject: {fileID: 1082142808}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.58, y: -1.1579999, z: 0}
+  m_LocalPosition: {x: -3.58, y: -1.19, z: 0}
   m_LocalScale: {x: 15.991864, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1046,7 +1071,7 @@ Transform:
   m_GameObject: {fileID: 1580412004}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.62, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
