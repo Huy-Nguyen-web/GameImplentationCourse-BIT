@@ -2,13 +2,28 @@ using System.Collections.Generic;
 using System.Linq;
 using AYellowpaper.SerializedCollections;
 using EditorAttributes;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class DungeonRoom : MonoBehaviour
 {
-    private Vector2Int _roomPos;
-    [SerializeField] private Vector2Int _roomSize;
+    [Header("Setup")]
+    [SerializeField] private Vector2Int roomSize;
+    [SerializeField] private GameObject roomPrefab;
+    [SerializedDictionary] public SerializedDictionary<DoorType, GameObject> doorsDictionary = new ();
+    [SerializeField] private Transform enemyPrefab; // Change this one to Enemy type later
+    [SerializeField] private Transform coinPrefab; // Change this one to Coin type later
+
+    [Header("Spawn Points")] 
+    [SerializeField] private Transform playerSpawnPoint;
+    [SerializeField] private Transform[] enemySpawnPoints;
+    [SerializeField] private Transform[] coinSpawnPoints;
+    [SerializeField] private Transform doorSpawnPoint;
+
+    [Header("Spawn chances")]
+    [SerializeField, Range(0.0f, 1.0f)] private float enemySpawnChance = 0.5f;
+    [SerializeField, Range(0.0f, 1.0f)] private float coinSpawnChance = 0.5f;
+
 
     public enum DoorType
     {
@@ -18,34 +33,26 @@ public class DungeonRoom : MonoBehaviour
         Right,
     }
     
-    private List<GameObject> _walls = new ();
-    private List<GameObject> _randomTiles = new ();
+    private readonly List<GameObject> _walls = new ();
+    private readonly List<GameObject> _randomTiles = new ();
 
-    [SerializeField] private GameObject roomPrefab;
-    [SerializedDictionary] public SerializedDictionary<DoorType, GameObject> _doorsDictionary = new ();
+    private readonly List<Transform> _enemies = new();
+    private readonly List<Transform> _coins = new();
+
+    private Vector2Int _roomPos;
 
     [Button]
     private void GenerateRoom()
     {
-        for (int y = 0; y < _roomSize.y; y++)
+        for (int y = 0; y < roomSize.y; y++)
         {
-            bool generateHorizontalWall = (y == 0 || y == _roomSize.y - 1);
+            bool generateHorizontalWall = (y == 0 || y == roomSize.y - 1);
 
-            for (int x = 0; x < _roomSize.x; x++)
+            for (int x = 0; x < roomSize.x; x++)
             {
-                if (generateHorizontalWall)
-                {
-                    GameObject wall = Instantiate(roomPrefab, new Vector2(x, y), Quaternion.identity, transform);
-                    _walls.Add(wall);
-                }
-                else
-                {
-                    if (x == 0 || x == _roomSize.x - 1)
-                    {
-                        GameObject wall = Instantiate(roomPrefab, new Vector2(x, y), Quaternion.identity, transform);
-                        _walls.Add(wall);
-                    }
-                }
+                if (!generateHorizontalWall && x != 0 && x != roomSize.x - 1) continue;
+                GameObject wall = Instantiate(roomPrefab, new Vector2(x, y), Quaternion.identity, transform);
+                _walls.Add(wall);
             }
         }
     }
@@ -65,7 +72,7 @@ public class DungeonRoom : MonoBehaviour
         int randomTileAmount = 3;
         for (int i = 0; i < randomTileAmount; i++)
         {
-            GameObject tile = Instantiate(roomPrefab, new Vector2(Random.Range(1, _roomSize.x-1), Random.Range(1, _roomSize.y-1)), Quaternion.identity, transform);
+            GameObject tile = Instantiate(roomPrefab, new Vector2(Random.Range(1, roomSize.x-1), Random.Range(1, roomSize.y-1)), Quaternion.identity, transform);
             _randomTiles.Add(tile);
         }
     }
@@ -79,35 +86,42 @@ public class DungeonRoom : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Initialize the room
+    /// </summary>
+    /// <param name="roomPos">The position of the room</param>
     public void Init(Vector2Int roomPos)
     {
         _roomPos = roomPos;
-        OpenRandomDoor(2);
+        OpenRandomDoor(3);
+        SpawnRandomEnemy();
     }
 
-    public void Init(Vector2Int roomPos, DoorType doorType)
-    {
-        _roomPos = roomPos;
-        OpenDoor(doorType);
-        // Maximum another 2 different doors to open
-        OpenRandomDoor(2);
-    }
-
+    /// <summary>
+    /// Open random door from top, bottom, left, right
+    /// Default: 4 doors
+    /// </summary>
     private void OpenRandomDoor()
     {
         int numberOfDoorsToOpen = Random.Range(0, 4);
         
         for (int i = 0; i < numberOfDoorsToOpen; i++)
         {
-            OpenDoor(_doorsDictionary.Keys.ToArray()[Random.Range(0, _doorsDictionary.Count)]);
+            OpenDoor(doorsDictionary.Keys.ToArray()[Random.Range(0, doorsDictionary.Count)]);
         }
     }
 
+    /// <summary>
+    /// Open random door from top, bottom, left, right
+    /// If the same door is trying to open, it'll skip
+    /// So there're always numberOfDoorsToOpen - 1 door to open
+    /// </summary>
+    /// <param name="numberOfDoorsToOpen">number of random door to open.</param>
     private void OpenRandomDoor(int numberOfDoorsToOpen)
     {
         for (int i = 0; i < numberOfDoorsToOpen; i++)
         {
-            OpenDoor(_doorsDictionary.Keys.ToArray()[Random.Range(0, _doorsDictionary.Count)]);
+            OpenDoor(doorsDictionary.Keys.ToArray()[Random.Range(0, doorsDictionary.Count)]);
         }
     }
 
@@ -117,7 +131,7 @@ public class DungeonRoom : MonoBehaviour
     /// <param name="doorType"></param>
     public void OpenDoor(DoorType doorType)
     {
-        _doorsDictionary[doorType].SetActive(false);
+        doorsDictionary[doorType].SetActive(false);
     }
 
     /// <summary>
@@ -126,9 +140,44 @@ public class DungeonRoom : MonoBehaviour
     /// <param name="doorType"></param>
     public void CloseDoor(DoorType doorType)
     {
-        _doorsDictionary[doorType].SetActive(true);
+        doorsDictionary[doorType].SetActive(true);
+    }
+
+    /// <summary>
+    /// Spawn random enemy in the room
+    /// </summary>
+    private void SpawnRandomEnemy()
+    {
+        for (int i = 0; i < enemySpawnPoints.Length; i++)
+        {
+            float randomChance = Random.Range(0f, 1f);
+            if (randomChance > enemySpawnChance)
+            {
+                var enemy = Instantiate(enemyPrefab, transform);
+                _enemies.Add(enemy);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Spawn random coin in the room
+    /// </summary>
+    private void SpawnRandomCoins()
+    {
+        for (int i = 0; i < coinSpawnPoints.Length; i++)
+        {
+            float randomChance = Random.Range(0f, 1f);
+            if (randomChance > coinSpawnChance)
+            {
+                var coin = Instantiate(coinPrefab, transform);
+                _coins.Add(coin);
+            }
+        }
     }
     
     public Vector2Int GetRoomPos() => _roomPos;
-    public Vector2Int GetRoomSize() => _roomSize;
+    public Vector2Int GetRoomSize() => roomSize;
+
+    public Transform GetPlayerSpawnPoint() => playerSpawnPoint;
+    public Transform GetDoorSpawnPoint() => doorSpawnPoint;
 }
