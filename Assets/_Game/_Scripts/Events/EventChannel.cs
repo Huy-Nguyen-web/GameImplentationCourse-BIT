@@ -42,17 +42,17 @@ public abstract class BaseEventChannelListener<TEventChannel, TEventContext> : M
     [SerializeField] protected TEventChannel eventChannel;
     [SerializeField] protected UnityEvent<TEventContext> onResponse;
 
-    protected void Awake()
-    {
-        if (eventChannel == null) return;
-        eventChannel.OnFindEventRaised += OnFindEventRaised;
-    }
+    //protected void Awake()
+    //{
+    //    if (eventChannel == null) return;
+    //    eventChannel.OnFindEventRaised += OnFindEventRaised;
+    //}
 
-    protected void Destroy()
-    {
-        if (eventChannel == null) return;
-        eventChannel.OnFindEventRaised -= OnFindEventRaised;
-    }
+    //protected void Destroy()
+    //{
+    //    if (eventChannel == null) return;
+    //    eventChannel.OnFindEventRaised -= OnFindEventRaised;
+    //}
 
     protected virtual void OnEnable()
     {

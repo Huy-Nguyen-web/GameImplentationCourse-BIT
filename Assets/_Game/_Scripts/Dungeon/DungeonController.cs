@@ -20,6 +20,7 @@ public class DungeonController : Singleton<DungeonController>
 
     [Header("Events")] 
     [SerializeField] private GenericEventChannelSO dungeonFinishEvent;
+    [SerializeField] private PositionEventChannelSO playerSetupEvent;
 
     private DungeonRoom _startRoom;
 
@@ -101,7 +102,7 @@ public class DungeonController : Singleton<DungeonController>
                     {
                         done = true;
                         _rooms[currentPos.x, currentPos.y].SpawnDoor();
-                        dungeonFinishEvent?.RaiseEvent();
+                        playerSetupEvent.RaiseEvent(new PositionEventContext(GetPlayerSpawnPoint().position));
                         return;
                     }
                     _rooms[currentPos.x, currentPos.y].OpenDoor(DungeonRoom.DoorType.Bottom);

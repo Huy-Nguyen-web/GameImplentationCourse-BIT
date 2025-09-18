@@ -74,4 +74,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
+    public void SetPosition(PositionEventContext context)
+    {
+        transform.position = context.position;
+    }
 }
