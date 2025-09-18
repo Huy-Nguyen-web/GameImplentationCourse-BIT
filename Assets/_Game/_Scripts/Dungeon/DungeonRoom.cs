@@ -13,6 +13,7 @@ public class DungeonRoom : MonoBehaviour
     [SerializedDictionary] public SerializedDictionary<DoorType, GameObject> doorsDictionary = new ();
     [SerializeField] private Transform enemyPrefab; // Change this one to Enemy type later
     [SerializeField] private Transform coinPrefab; // Change this one to Coin type later
+    [SerializeField] private Transform doorPrefab;
 
     [Header("Spawn Points")] 
     [SerializeField] private Transform playerSpawnPoint;
@@ -93,6 +94,7 @@ public class DungeonRoom : MonoBehaviour
     public void Init(Vector2Int roomPos)
     {
         _roomPos = roomPos;
+        Debug.Log($"Enemy Spawn Chance {enemySpawnChance}");
         OpenRandomDoor(3);
         SpawnRandomEnemy();
     }
@@ -151,9 +153,11 @@ public class DungeonRoom : MonoBehaviour
         for (int i = 0; i < enemySpawnPoints.Length; i++)
         {
             float randomChance = Random.Range(0f, 1f);
-            if (randomChance > enemySpawnChance)
+            Debug.Log(randomChance);
+            if (randomChance < enemySpawnChance)
             {
-                var enemy = Instantiate(enemyPrefab, transform);
+                Debug.Log("Spawn enemy");
+                var enemy = Instantiate(enemyPrefab, enemySpawnPoints[i].position, Quaternion.identity, enemySpawnPoints[i].transform);
                 _enemies.Add(enemy);
             }
         }
@@ -173,6 +177,12 @@ public class DungeonRoom : MonoBehaviour
                 _coins.Add(coin);
             }
         }
+    }
+
+    public void SpawnDoor()
+    {
+        Vector3 offset = new Vector3(0.25f, -0.125f, 0f);
+        Instantiate(doorPrefab, doorSpawnPoint.transform.position + offset, Quaternion.identity);
     }
     
     public Vector2Int GetRoomPos() => _roomPos;

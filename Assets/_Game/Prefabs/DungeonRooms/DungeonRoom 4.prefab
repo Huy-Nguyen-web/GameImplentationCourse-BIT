@@ -1769,12 +1769,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c4116c5b3c19444be3d7e489aab7f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomSize: {x: 0, y: 0}
+  roomSize: {x: 5, y: 5}
   roomPrefab: {fileID: 2184611438299470207, guid: 2908a9c714b386a468d3f01ab417a241, type: 3}
   doorsDictionary:
-    _serializedList: []
+    _serializedList:
+    - Key: 0
+      Value: {fileID: 793201362677185335}
+    - Key: 1
+      Value: {fileID: 5910773838059257580}
+    - Key: 2
+      Value: {fileID: 4140790450202385686}
+    - Key: 3
+      Value: {fileID: 1071666559545876099}
   enemyPrefab: {fileID: 6174597784405897538, guid: 4f7d96cd2f1eb63448f2fb99cdfd88c9, type: 3}
   coinPrefab: {fileID: 1922886326151687497, guid: e4f6a62e39fef974aa6fb44c5a3d339e, type: 3}
+  doorPrefab: {fileID: 732221428757863048, guid: 69406db8bf7776643a5e12f1ba26ced1, type: 3}
   playerSpawnPoint: {fileID: 7542089504165732889}
   enemySpawnPoints:
   - {fileID: 5992774214156731249}
@@ -1785,7 +1794,7 @@ MonoBehaviour:
   - {fileID: 2166540733226674208}
   - {fileID: 3471768347003133772}
   doorSpawnPoint: {fileID: 1092303075706441627}
-  enemySpawnChance: 0.5
+  enemySpawnChance: 0.3
   coinSpawnChance: 0.5
 --- !u!1 &5353252632133096585
 GameObject:

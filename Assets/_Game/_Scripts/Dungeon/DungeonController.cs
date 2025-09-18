@@ -18,6 +18,11 @@ public class DungeonController : Singleton<DungeonController>
     [SerializeField] private DungeonRoom[] roomPrefabs;
     [SerializeField] private Vector2Int dungeonSize;
 
+    [Header("Events")] 
+    [SerializeField] private GenericEventChannelSO dungeonFinishEvent;
+
+    private DungeonRoom _startRoom;
+
     private readonly DungeonRoom[,] _rooms = new DungeonRoom[4, 4];
 
     private void Start()
@@ -39,6 +44,7 @@ public class DungeonController : Singleton<DungeonController>
         bool done = false;
         Vector2Int currentPos = new Vector2Int(Random.Range(0, dungeonSize.x), dungeonSize.y - 1);
         MoveOptions currentMove = MoveOptions.None;
+        int move = 0;
         while (!done)
         {
             List<MoveOptions> moves = new List<MoveOptions>()
@@ -55,6 +61,11 @@ public class DungeonController : Singleton<DungeonController>
             if (currentPos.x == dungeonSize.x - 1) moves.Remove(MoveOptions.Right);
             
             _rooms[currentPos.x, currentPos.y] = SpawnRoom(currentPos);
+            if (move == 0)
+            {
+                _startRoom = _rooms[currentPos.x, currentPos.y];
+            }
+            move++;
             _rooms[currentPos.x, currentPos.y].Init(currentPos);
             switch (currentMove)
             {
@@ -68,6 +79,7 @@ public class DungeonController : Singleton<DungeonController>
                     _rooms[currentPos.x, currentPos.y].OpenDoor(DungeonRoom.DoorType.Top);
                     break;
             }
+
             if(currentPos.y == dungeonSize.y - 1) _rooms[currentPos.x, currentPos.y].CloseDoor(DungeonRoom.DoorType.Top);
             if(currentPos.y == 0) _rooms[currentPos.x, currentPos.y].CloseDoor(DungeonRoom.DoorType.Bottom);
             if(currentPos.x == dungeonSize.x - 1) _rooms[currentPos.x, currentPos.y].CloseDoor(DungeonRoom.DoorType.Right);
@@ -88,9 +100,8 @@ public class DungeonController : Singleton<DungeonController>
                     if (currentPos.y == 0)
                     {
                         done = true;
-                        // TODO: Generate the final room here
-                        // TODO: Generate the door
-                        Debug.Log($"This is end at {currentPos}");
+                        _rooms[currentPos.x, currentPos.y].SpawnDoor();
+                        dungeonFinishEvent?.RaiseEvent();
                         return;
                     }
                     _rooms[currentPos.x, currentPos.y].OpenDoor(DungeonRoom.DoorType.Bottom);
@@ -122,5 +133,10 @@ public class DungeonController : Singleton<DungeonController>
                 }
             }
         }
+    }
+
+    public Transform GetPlayerSpawnPoint()
+    {
+        return _startRoom.GetPlayerSpawnPoint();
     }
 }

@@ -1494,18 +1494,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c4116c5b3c19444be3d7e489aab7f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _roomSize: {x: 5, y: 5}
+  roomSize: {x: 0, y: 0}
   roomPrefab: {fileID: 2184611438299470207, guid: 2908a9c714b386a468d3f01ab417a241, type: 3}
-  _doorsDictionary:
-    _serializedList:
-    - Key: 0
-      Value: {fileID: 793201362677185335}
-    - Key: 1
-      Value: {fileID: 5910773838059257580}
-    - Key: 2
-      Value: {fileID: 4140790450202385686}
-    - Key: 3
-      Value: {fileID: 1071666559545876099}
+  doorsDictionary:
+    _serializedList: []
+  enemyPrefab: {fileID: 0}
+  coinPrefab: {fileID: 0}
+  playerSpawnPoint: {fileID: 0}
+  enemySpawnPoints: []
+  coinSpawnPoints: []
+  doorSpawnPoint: {fileID: 0}
+  enemySpawnChance: 0.2
+  coinSpawnChance: 0.5
 --- !u!1 &5353252632133096585
 GameObject:
   m_ObjectHideFlags: 0

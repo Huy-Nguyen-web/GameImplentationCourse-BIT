@@ -308,6 +308,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DungeonGenerator
       objectReference: {fileID: 0}
+    - target: {fileID: 7925098746330982326, guid: 45711178d22a8594ea066cc7d33092bf, type: 3}
+      propertyPath: dungeonFinishEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 8b7ae10f8aa75f345aeb4cc0c4862530, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
