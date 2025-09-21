@@ -398,12 +398,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGrounded: 0
   isFacingRight: 1
-  moveSpeed: 10
+  moveSpeed: 5
   groundCheck: {fileID: 2545860107684732147}
   groundMask:
     serializedVersion: 2
     m_Bits: 64
-  jumpForce: 10
+  jumpForce: 12
   anim: {fileID: 7742334430441567667}
 --- !u!114 &1061130610588842097
 MonoBehaviour:
@@ -449,7 +449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36948cfaaf6a19f4ab94d369e23a67d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventChannel: {fileID: 0}
+  eventChannel: {fileID: 11400000, guid: 9773b12cc595dd84eaf19a8d1aa7d338, type: 2}
   onResponse:
     m_PersistentCalls:
       m_Calls:

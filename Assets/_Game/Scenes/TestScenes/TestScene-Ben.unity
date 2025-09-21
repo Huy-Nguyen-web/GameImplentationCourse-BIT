@@ -574,18 +574,6 @@ PrefabInstance:
       propertyPath: hpBar
       value: 
       objectReference: {fileID: 124378464}
-    - target: {fileID: 4369901561734441179, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
-      propertyPath: jumpForce
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 4369901561734441179, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
-      propertyPath: moveSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7605607058883326612, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
-      propertyPath: eventChannel
-      value: 
-      objectReference: {fileID: 11400000, guid: 9773b12cc595dd84eaf19a8d1aa7d338, type: 2}
     - target: {fileID: 8439165499170983573, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

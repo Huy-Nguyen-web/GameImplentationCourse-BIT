@@ -1,8 +1,5 @@
 using System.Collections.Generic;
-using AYellowpaper.SerializedCollections;
-using EditorAttributes;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class DungeonController : Singleton<DungeonController>
 {
@@ -48,6 +45,7 @@ public class DungeonController : Singleton<DungeonController>
         int move = 0;
         while (!done)
         {
+            // Prepare move options
             List<MoveOptions> moves = new List<MoveOptions>()
             {
                 MoveOptions.Left,
@@ -55,12 +53,14 @@ public class DungeonController : Singleton<DungeonController>
                 MoveOptions.Bottom,
             };
             
+            // Remove move options in case it move back to previous room, or it hit the max left/right
             if(currentMove == MoveOptions.Left) moves.Remove(MoveOptions.Right);
             if(currentMove == MoveOptions.Right) moves.Remove(MoveOptions.Left);
 
             if (currentPos.x == 0) moves.Remove(MoveOptions.Left);
             if (currentPos.x == dungeonSize.x - 1) moves.Remove(MoveOptions.Right);
             
+            // Spawn the room in current position, if just start spawn the room, then set it to the start room
             _rooms[currentPos.x, currentPos.y] = SpawnRoom(currentPos);
             if (move == 0)
             {
@@ -68,6 +68,8 @@ public class DungeonController : Singleton<DungeonController>
             }
             move++;
             _rooms[currentPos.x, currentPos.y].Init(currentPos);
+
+            // Open the wall tile base on the route that the rooms has spawned
             switch (currentMove)
             {
                 case MoveOptions.Left:
@@ -81,11 +83,13 @@ public class DungeonController : Singleton<DungeonController>
                     break;
             }
 
+            // Close the wall if it hit max left, right, top or bottom
             if(currentPos.y == dungeonSize.y - 1) _rooms[currentPos.x, currentPos.y].CloseDoor(DungeonRoom.DoorType.Top);
             if(currentPos.y == 0) _rooms[currentPos.x, currentPos.y].CloseDoor(DungeonRoom.DoorType.Bottom);
             if(currentPos.x == dungeonSize.x - 1) _rooms[currentPos.x, currentPos.y].CloseDoor(DungeonRoom.DoorType.Right);
             if(currentPos.x == 0) _rooms[currentPos.x, currentPos.y].CloseDoor(DungeonRoom.DoorType.Left);
             
+            // Make next room in randomly left, right or down
             currentMove = moves[Random.Range(0, moves.Count)];
             switch (currentMove)
             {
@@ -100,6 +104,7 @@ public class DungeonController : Singleton<DungeonController>
                 case MoveOptions.Bottom:
                     if (currentPos.y == 0)
                     {
+                        // If try to go down when it hit the very bottom, this should be a final room
                         done = true;
                         _rooms[currentPos.x, currentPos.y].SpawnDoor();
                         playerSetupEvent.RaiseEvent(new PositionEventContext(GetPlayerSpawnPoint().position));
@@ -118,6 +123,7 @@ public class DungeonController : Singleton<DungeonController>
 
     public void PopulateRoom()
     {
+        // Fill up all the room other than the main route
         for (int y = dungeonSize.y - 1; y >= 0; y--)
         {
             for (int x = 0; x < dungeonSize.x; x++)
