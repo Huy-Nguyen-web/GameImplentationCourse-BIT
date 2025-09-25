@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 10
-  m_WholeNumbers: 0
+  m_WholeNumbers: 1
   m_Value: 10
   m_OnValueChanged:
     m_PersistentCalls:
@@ -429,6 +429,8 @@ GameObject:
   - component: {fileID: 388428675}
   - component: {fileID: 388428674}
   - component: {fileID: 388428673}
+  - component: {fileID: 388428678}
+  - component: {fileID: 388428677}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -519,6 +521,47 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &388428677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388428672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c33c346b65b3730438eba98ea3603f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventChannel: {fileID: 11400000, guid: 884418740f7eb7b429db2eca4ce5b996, type: 2}
+  onResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 388428678}
+        m_TargetAssemblyTypeName: UpdateUI, Assembly-CSharp
+        m_MethodName: UpdateHealthUI
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &388428678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388428672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04162bce13ff341498c54bab07679d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 365796972}
 --- !u!1 &549069408
 GameObject:
   m_ObjectHideFlags: 0
@@ -1298,6 +1341,38 @@ PrefabInstance:
       propertyPath: hpBar
       value: 
       objectReference: {fileID: 365796972}
+    - target: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
+      propertyPath: healthChangeEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 884418740f7eb7b429db2eca4ce5b996, type: 2}
+    - target: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
+      propertyPath: gainHpEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
+      propertyPath: gainHpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
+      propertyPath: gainHpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5665014295888841635}
+    - target: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
+      propertyPath: gainHpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
+      propertyPath: gainHpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TakeDamage
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
+      propertyPath: gainHpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerHP, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
+      propertyPath: gainHpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8439165499170983573, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1343,6 +1418,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
+--- !u!114 &5665014295888841635 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
+  m_PrefabInstance: {fileID: 5665014295888841634}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 514a4b987838012448a4b2c5b5825866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

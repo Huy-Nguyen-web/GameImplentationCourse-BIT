@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerAttackScript : MonoBehaviour
@@ -6,6 +7,9 @@ public class PlayerAttackScript : MonoBehaviour
     [SerializeField] private Transform attackZoneRight;
     [SerializeField] private Transform attackZoneLeft;
     [SerializeField] private GameObject attackHitbox;
+    private PlayerHP playerHP;
+
+    public Action playerAction;
 
     private PlayerMovement movementScript;
 
@@ -15,6 +19,8 @@ public class PlayerAttackScript : MonoBehaviour
     void Start()
     {
         movementScript = GetComponent<PlayerMovement>();
+        playerHP = GetComponent<PlayerHP>();
+
     }
 
     // Update is called once per frame
@@ -22,6 +28,21 @@ public class PlayerAttackScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftControl) && recoveryTime <= 0)
         {
+            //playerAction = (playerHP.CheckHealth() > 5) ? Attack : Heal;
+            //playerHP.UpdateHealth();
+            playerAction?.Invoke();
+            playerHP.UpdateHealth(OnPlayerUpdateHealth);
+        }
+
+        if (recoveryTime > 0)
+        {
+            recoveryTime -= 1f * Time.deltaTime;
+        }
+    }
+
+    private void Attack()
+    {
+        
             if (movementScript.isFacingRight)
             {
                 Instantiate(attackHitbox, attackZoneRight.position, Quaternion.identity);
@@ -33,11 +54,18 @@ public class PlayerAttackScript : MonoBehaviour
 
             recoveryTime = 1f;
             anim.SetTrigger("Attack");
-        }
+        
+    }
 
-        if (recoveryTime > 0)
-        {
-            recoveryTime -= 1f * Time.deltaTime;
-        }
+    private void Heal()
+    {
+        playerHP.GainHeath();
+        playerHP.UpdateHealth();
+    }
+
+    private void OnPlayerUpdateHealth(int health)
+    {
+        if (health < 5) Heal();
+        else Attack();
     }
 }

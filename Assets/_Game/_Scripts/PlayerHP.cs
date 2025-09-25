@@ -1,10 +1,12 @@
+using EditorAttributes;
+using System;
+using System.Diagnostics.Tracing;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PlayerHP : MonoBehaviour
 {
-    [SerializeField] private Slider hpBar;
 
     private int health;
     [SerializeField] private int maxHealth;
@@ -18,11 +20,12 @@ public class PlayerHP : MonoBehaviour
 
     [SerializeField] private UnityEvent gainHpEvent;
 
+    [SerializeField] private GenericEventChannelSO healthChangeEventChannel;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         health = maxHealth;
-        hpBar.maxValue = maxHealth;
         movementScript = GetComponent<PlayerMovement>();
         rb = GetComponent<Rigidbody2D>();
     }
@@ -30,7 +33,6 @@ public class PlayerHP : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        hpBar.value = health;
         if (health <= 0 && !isDead)
         {
             Death();
@@ -44,6 +46,7 @@ public class PlayerHP : MonoBehaviour
         if (collision.CompareTag("Enemy") && !isDead)
         {
             health--;
+            UpdateHealth(health);
             Debug.Log("tookDamage");
         }
     }
@@ -56,8 +59,27 @@ public class PlayerHP : MonoBehaviour
         anim.SetTrigger("Dead");
     }
 
-    private void TakeDamage()
+    [Button]
+    public void GainHeath()
     {
-
+        health = maxHealth;
+        gainHpEvent?.Invoke();
     }
+
+    public void UpdateHealth(int health)
+    {
+        healthChangeEventChannel?.RaiseEvent(new Context(health));
+    }
+
+    public void UpdateHealth()
+    {
+        healthChangeEventChannel?.RaiseEvent(new Context(health));
+    }
+
+    public void UpdateHealth(Action<int> action)
+    {
+        action?.Invoke(health);
+    }
+
+    public int CheckHealth() => health;
 }
