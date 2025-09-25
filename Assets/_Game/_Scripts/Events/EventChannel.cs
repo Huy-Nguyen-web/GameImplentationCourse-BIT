@@ -10,8 +10,8 @@ using UnityEngine.Events;
 /// <typeparam name="T">EventContext: Custom context to invoke</typeparam>
 public abstract class BaseEventChannelSO<T> : ScriptableObject where T : EventContext
 {
-    public UnityAction<T> OnEventRaised;
-    public UnityAction<BaseEventChannelSO<T>> OnFindEventRaised;
+    public UnityAction<T?>? OnEventRaised;
+    public UnityAction<BaseEventChannelSO<T>>? OnFindEventRaised;
     
     public void RaiseEvent(T? context)
     {
@@ -42,17 +42,17 @@ public abstract class BaseEventChannelListener<TEventChannel, TEventContext> : M
     [SerializeField] protected TEventChannel eventChannel;
     [SerializeField] protected UnityEvent<TEventContext> onResponse;
 
-    //protected void Awake()
-    //{
-    //    if (eventChannel == null) return;
-    //    eventChannel.OnFindEventRaised += OnFindEventRaised;
-    //}
+    protected void Awake()
+    {
+        if (eventChannel == null) return;
+        eventChannel.OnFindEventRaised += OnFindEventRaised;
+    }
 
-    //protected void Destroy()
-    //{
-    //    if (eventChannel == null) return;
-    //    eventChannel.OnFindEventRaised -= OnFindEventRaised;
-    //}
+    protected void Destroy()
+    {
+        if (eventChannel == null) return;
+        eventChannel.OnFindEventRaised = null;
+    }
 
     protected virtual void OnEnable()
     {
@@ -63,7 +63,7 @@ public abstract class BaseEventChannelListener<TEventChannel, TEventContext> : M
     protected virtual void OnDisable()
     {
         if(eventChannel == null) return;
-        eventChannel.OnEventRaised -= OnEventRaised;
+        eventChannel.OnEventRaised = null;
     }
 
     protected virtual void OnEventRaised(TEventContext ctx)

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class PlayerHP : MonoBehaviour
 {
     [SerializeField] private Slider hpBar;
+    [SerializeField] private GenericEventChannelSO playerHealthChangeEvent;
 
     private int health;
     [SerializeField] private int maxHealth;
@@ -52,4 +53,5 @@ public class PlayerHP : MonoBehaviour
         rb.linearVelocity = new Vector2(0, 0);
         anim.SetTrigger("Dead");
     }
+
 }

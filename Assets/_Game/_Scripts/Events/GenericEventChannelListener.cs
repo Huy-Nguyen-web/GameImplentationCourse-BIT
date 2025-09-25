@@ -1,3 +1,1 @@
-using UnityEngine;
-
-public class GenericEventChannelListener : BaseEventChannelListener<GenericEventChannelSO, EventContext> { }
+public class GenericEventChannelListener : BaseEventChannelListener<GenericEventChannelSO, Context> { } 

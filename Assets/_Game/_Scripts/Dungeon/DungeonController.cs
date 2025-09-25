@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DungeonController : Singleton<DungeonController>
 {
@@ -22,6 +23,8 @@ public class DungeonController : Singleton<DungeonController>
     private DungeonRoom _startRoom;
 
     private readonly DungeonRoom[,] _rooms = new DungeonRoom[4, 4];
+
+    private Button _someButton;
 
     private void Start()
     {
