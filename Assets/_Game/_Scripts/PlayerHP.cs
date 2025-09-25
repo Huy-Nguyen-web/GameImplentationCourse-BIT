@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PlayerHP : MonoBehaviour
@@ -14,6 +15,8 @@ public class PlayerHP : MonoBehaviour
     [SerializeField] private Animator anim;
 
     private Rigidbody2D rb;
+
+    [SerializeField] private UnityEvent gainHpEvent;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -51,5 +54,10 @@ public class PlayerHP : MonoBehaviour
         movementScript.enabled = false;
         rb.linearVelocity = new Vector2(0, 0);
         anim.SetTrigger("Dead");
+    }
+
+    private void TakeDamage()
+    {
+
     }
 }

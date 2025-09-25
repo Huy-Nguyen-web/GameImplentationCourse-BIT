@@ -40,9 +40,4 @@ public class PlayerAttackScript : MonoBehaviour
             recoveryTime -= 1f * Time.deltaTime;
         }
     }
-
-    private void FixedUpdate()
-    {
-        
-    }
 }
