@@ -1,0 +1,1 @@
+public class GenericEventChannelListener : BaseEventChannelListener<GenericEventChannelSO, Context> { } 
