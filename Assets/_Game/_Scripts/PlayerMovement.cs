@@ -15,11 +15,16 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Animator anim;
 
+    [SerializeField] private Transform fallPointTransform;
+    [SerializeField] private float fallDamageDistance;
+    [SerializeField] private bool activateOnce;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sprait = GetComponentInChildren<SpriteRenderer>();
+        activateOnce = true;
     }
 
     // Update is called once per frame
@@ -56,6 +61,18 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("Grounded", false);
         }
+
+        if(!isGrounded && activateOnce)
+        {
+            OnGroundLeft();
+        }
+
+        if(isGrounded && !activateOnce)
+        {
+            OnLanded();
+        }
+
+
     }
 
     private void FixedUpdate()
@@ -77,5 +94,21 @@ public class PlayerMovement : MonoBehaviour
     public void SetPosition(PositionEventContext context)
     {
         transform.position = context.position;
+    }
+
+    private void OnGroundLeft()
+    {
+        fallPointTransform.position = groundCheck.position;
+        activateOnce = false;
+    }
+
+    private void OnLanded()
+    {
+        float distance = Vector2.Distance(transform.position, fallPointTransform.position);
+        if (distance > fallDamageDistance)
+        {
+            Debug.Log("Took fall damage");
+        }
+        activateOnce = true;
     }
 }
