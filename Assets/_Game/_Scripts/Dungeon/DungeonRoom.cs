@@ -97,6 +97,7 @@ public class DungeonRoom : MonoBehaviour
         Debug.Log($"Enemy Spawn Chance {enemySpawnChance}");
         OpenRandomDoor(3);
         SpawnRandomEnemy();
+        SpawnRandomCoin();
     }
 
     /// <summary>
@@ -159,6 +160,22 @@ public class DungeonRoom : MonoBehaviour
                 Debug.Log("Spawn enemy");
                 var enemy = Instantiate(enemyPrefab, enemySpawnPoints[i].position, Quaternion.identity, enemySpawnPoints[i].transform);
                 _enemies.Add(enemy);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Spawn coins randomly in the room
+    /// </summary>
+    private void SpawnRandomCoin()
+    {
+        for (int i = 0; i < coinSpawnPoints.Length; i++)
+        {
+            float randomChance = Random.Range(0f, 1f);
+            if (randomChance < coinSpawnChance)
+            {
+                var coin = Instantiate(coinPrefab, coinSpawnPoints[i].position, Quaternion.identity, coinSpawnPoints[i].transform);
+                _coins.Add(coin);
             }
         }
     }

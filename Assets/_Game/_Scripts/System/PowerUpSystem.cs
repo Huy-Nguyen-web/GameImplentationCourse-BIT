@@ -17,6 +17,7 @@ namespace _Game._Scripts.System
         {
             if(_currentPowerUp == null) return;
             _currentPowerUp.Stop();
+            _currentPowerUp = null;
         }
 
         public void SetPowerUp(BasePowerUp powerUp)

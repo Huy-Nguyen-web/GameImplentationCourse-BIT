@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float fallDamageDistance;
     [SerializeField] private bool activateOnce;
 
+    private float _speedMultiplier = 1.0f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,9 +33,8 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
-        //float moveVertical = Input.GetAxisRaw("Vertical");
 
-        rb.linearVelocity = new Vector2(moveHorizontal * moveSpeed, rb.linearVelocityY);
+        rb.linearVelocity = new Vector2(moveHorizontal * moveSpeed * _speedMultiplier, rb.linearVelocityY);
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundMask);
 
@@ -50,7 +51,6 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             anim.SetTrigger("Jump");
-            //rb.gravityScale = 0;
         }
 
         if (isGrounded)
@@ -111,4 +111,17 @@ public class PlayerMovement : MonoBehaviour
         }
         activateOnce = true;
     }
+    
+    #region Events
+
+    public void OnSpeedPowerUp(Context ctx)
+    {
+        bool powerUpTrigger = false;
+        if (ctx != null)
+        {
+            powerUpTrigger = (bool)ctx.Data[0];
+        }
+        _speedMultiplier = (powerUpTrigger) ? 2.0f : 1.0f;
+    }
+    #endregion
 }
