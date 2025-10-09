@@ -1,13 +1,13 @@
 using System;
 using UnityEngine;
 
-public class PlayerAttackScript : MonoBehaviour
+public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private float recoveryTime;
     [SerializeField] private Transform attackZoneRight;
     [SerializeField] private Transform attackZoneLeft;
     [SerializeField] private GameObject attackHitbox;
-    private PlayerHP playerHP;
+    private PlayerHealth playerHealth;
 
     public Action playerAction;
 
@@ -19,7 +19,7 @@ public class PlayerAttackScript : MonoBehaviour
     void Start()
     {
         movementScript = GetComponent<PlayerMovement>();
-        playerHP = GetComponent<PlayerHP>();
+        playerHealth = GetComponent<PlayerHealth>();
 
     }
 
@@ -31,7 +31,7 @@ public class PlayerAttackScript : MonoBehaviour
             //playerAction = (playerHP.CheckHealth() > 5) ? Attack : Heal;
             //playerHP.UpdateHealth();
             playerAction?.Invoke();
-            playerHP.UpdateHealth(OnPlayerUpdateHealth);
+            playerHealth.UpdateHealth(OnPlayerUpdateHealth);
         }
 
         if (recoveryTime > 0)
@@ -59,8 +59,8 @@ public class PlayerAttackScript : MonoBehaviour
 
     private void Heal()
     {
-        playerHP.GainHeath();
-        playerHP.UpdateHealth();
+        playerHealth.GainHeath();
+        playerHealth.UpdateHealth();
     }
 
     private void OnPlayerUpdateHealth(int health)

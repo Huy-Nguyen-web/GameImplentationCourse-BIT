@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class PlayerHP : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
 
     private int health;
