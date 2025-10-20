@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 7605607058883326612}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -318,6 +318,7 @@ Transform:
   - {fileID: 2834460682920121252}
   - {fileID: 8483992487128691774}
   - {fileID: 1602751550075128438}
+  - {fileID: 9090095568897000724}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &2436890523428943347
@@ -405,6 +406,9 @@ MonoBehaviour:
     m_Bits: 64
   jumpForce: 12
   anim: {fileID: 7742334430441567667}
+  fallPointTransform: {fileID: 0}
+  fallDamageDistance: 0
+  activateOnce: 0
 --- !u!114 &1061130610588842097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,9 +438,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 514a4b987838012448a4b2c5b5825866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpBar: {fileID: 0}
   maxHealth: 10
   anim: {fileID: 7742334430441567667}
+  gainHpEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  healthChangeEventChannel: {fileID: 0}
 --- !u!114 &7605607058883326612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,6 +463,66 @@ MonoBehaviour:
       - m_Target: {fileID: 4369901561734441179}
         m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
         m_MethodName: SetPosition
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1 &4483838465433093427
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9090095568897000724}
+  - component: {fileID: 5692454325578327416}
+  m_Layer: 0
+  m_Name: PlayerSpeedEventListener
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9090095568897000724
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4483838465433093427}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.992, z: -8.45}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8439165499170983573}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5692454325578327416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4483838465433093427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c33c346b65b3730438eba98ea3603f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventChannel: {fileID: 11400000, guid: 5572c2cf21beb4048ab4734e1fed04a0, type: 2}
+  onResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4369901561734441179}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: OnSpeedPowerUp
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

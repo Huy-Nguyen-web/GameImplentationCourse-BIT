@@ -31,14 +31,12 @@ public class PlayerHealth : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (health <= 0 && !isDead)
         {
             Death();
         }
-
-        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

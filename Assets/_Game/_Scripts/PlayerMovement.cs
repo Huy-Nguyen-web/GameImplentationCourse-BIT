@@ -21,7 +21,6 @@ public class PlayerMovement : MonoBehaviour
 
     private float _speedMultiplier = 1.0f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -29,9 +28,9 @@ public class PlayerMovement : MonoBehaviour
         activateOnce = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        // TODO: Move this to finite state machine later as it getting quite big with the if else statement
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
 
         rb.linearVelocity = new Vector2(moveHorizontal * moveSpeed * _speedMultiplier, rb.linearVelocityY);
@@ -71,8 +70,6 @@ public class PlayerMovement : MonoBehaviour
         {
             OnLanded();
         }
-
-
     }
 
     private void FixedUpdate()
@@ -98,12 +95,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnGroundLeft()
     {
+        if (!fallPointTransform) return;
         fallPointTransform.position = groundCheck.position;
         activateOnce = false;
     }
 
     private void OnLanded()
     {
+        if(!fallPointTransform) return;
         float distance = Vector2.Distance(transform.position, fallPointTransform.position);
         if (distance > fallDamageDistance)
         {

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfb16a4437914d6488ea86bd057786f4, type: 3}
   m_Name: SpeedPowerUp
   m_EditorClassIdentifier: 
-  GenericEventChannelSO: {fileID: 0}
+  GenericEventChannelSO: {fileID: 11400000, guid: 5572c2cf21beb4048ab4734e1fed04a0, type: 2}
   duration: 5
