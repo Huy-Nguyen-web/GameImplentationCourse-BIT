@@ -20,12 +20,12 @@ public class Enemy : MonoBehaviour
 
         if(Physics2D.Raycast(groundCheck.position, Vector2.down, 0.5f, groundLayer) && !Physics2D.Raycast(wallCheck.position, Vector2.right, 0.1f, groundLayer))
         {
-            Debug.Log("keep walking");
+            
             //keep walking
         }
         else
         {
-            Debug.Log("turn around");
+           
             _isFacingRight = !_isFacingRight;
             var localScale = transform.localScale;
             localScale.x = (_isFacingRight) ? 1f : -1f;

@@ -19,11 +19,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float fallDamageDistance;
     [SerializeField] private bool activateOnce;
 
+    private PlayerHP playerHPScript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sprait = GetComponentInChildren<SpriteRenderer>();
+        playerHPScript = GetComponent<PlayerHP>();
         activateOnce = true;
     }
 
@@ -104,10 +107,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnLanded()
     {
-        float distance = Vector2.Distance(transform.position, fallPointTransform.position);
+        float distance = fallPointTransform.position.y - transform.position.y;
         if (distance > fallDamageDistance)
         {
             Debug.Log("Took fall damage");
+            playerHPScript.TakeDamage();
         }
         activateOnce = true;
     }
