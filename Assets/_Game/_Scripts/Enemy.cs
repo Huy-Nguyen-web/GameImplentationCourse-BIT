@@ -1,4 +1,7 @@
+using System.Numerics;
 using UnityEngine;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 public class Enemy : MonoBehaviour
 {
@@ -7,6 +10,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform wallCheck;
     [SerializeField] private LayerMask groundLayer;
     private bool _isFacingRight;
+    private Vector2 velocity;
+
+    private bool _isOnGround;
 
     
     void Start()
@@ -17,7 +23,6 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if(Physics2D.Raycast(groundCheck.position, Vector2.down, 0.5f, groundLayer) && !Physics2D.Raycast(wallCheck.position, Vector2.right, 0.1f, groundLayer))
         {
             Debug.Log("keep walking");
@@ -31,16 +36,26 @@ public class Enemy : MonoBehaviour
             localScale.x = (_isFacingRight) ? 1f : -1f;
             transform.localScale = localScale;
         }
+
+        RaycastHit2D hit = (Physics2D.Raycast(transform.position, Vector2.down, 0.5f, groundLayer));
+        _isOnGround = hit != null;
+        if (_isOnGround)
+        {
+            transform.position = new Vector3(transform.position.x, hit.point.y + 0.5f, transform.position.z);
+        }
     }
     private void FixedUpdate()
     {
-        if (_isFacingRight)
+        velocity.y = (_isOnGround) ? 0 : Physics2D.gravity.y;
+        velocity.x = moveSpeed * (_isFacingRight ? 1f : -1f);
+        transform.Translate(velocity * Time.fixedDeltaTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("PlayerAttack"))
         {
-            transform.Translate(Vector2.right * moveSpeed * Time.fixedDeltaTime);
-        }
-        else
-        {
-            transform.Translate(Vector2.left * moveSpeed * Time.fixedDeltaTime);
+            Destroy(gameObject);
         }
     }
 
@@ -49,5 +64,6 @@ public class Enemy : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawLine(groundCheck.position, groundCheck.position + (Vector3)(Vector2.down * 0.5f));
         Gizmos.DrawLine(wallCheck.position, wallCheck.position + (Vector3)(Vector2.right * 0.1f));
+        Gizmos.DrawLine(transform.position, transform.position + (Vector3)(Vector2.down * 0.5f));
     }
 }
