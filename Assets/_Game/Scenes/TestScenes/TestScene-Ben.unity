@@ -131,6 +131,8 @@ GameObject:
   - component: {fileID: 20856024}
   - component: {fileID: 20856023}
   - component: {fileID: 20856022}
+  - component: {fileID: 20856027}
+  - component: {fileID: 20856026}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -221,6 +223,47 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &20856026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20856021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c33c346b65b3730438eba98ea3603f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventChannel: {fileID: 11400000, guid: 884418740f7eb7b429db2eca4ce5b996, type: 2}
+  onResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 20856027}
+        m_TargetAssemblyTypeName: UpdateUI, Assembly-CSharp
+        m_MethodName: UpdateHealthUI
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &20856027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20856021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04162bce13ff341498c54bab07679d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 124378464}
 --- !u!1 &124378462
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,6 +353,17 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &137472308 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
+  m_PrefabInstance: {fileID: 1586802440}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 514a4b987838012448a4b2c5b5825866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &370398960
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,6 +539,38 @@ PrefabInstance:
       propertyPath: hpBar
       value: 
       objectReference: {fileID: 124378464}
+    - target: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
+      propertyPath: healthChangeEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 884418740f7eb7b429db2eca4ce5b996, type: 2}
+    - target: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
+      propertyPath: gainHpEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
+      propertyPath: gainHpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
+      propertyPath: gainHpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 137472308}
+    - target: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
+      propertyPath: gainHpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
+      propertyPath: gainHpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GainHeath
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
+      propertyPath: gainHpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerHealth, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
+      propertyPath: gainHpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4830254998832909538, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
       propertyPath: m_SortingOrder
       value: 1
