@@ -21,16 +21,19 @@ public class PlayerMovement : MonoBehaviour
 
     private float _speedMultiplier = 1.0f;
 
+    private PlayerHealth playerHPScript;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sprait = GetComponentInChildren<SpriteRenderer>();
+        playerHPScript = GetComponent<PlayerHealth>();
         activateOnce = true;
     }
 
     private void Update()
     {
-        // TODO: Move this to finite state machine later as it getting quite big with the if else statement
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
 
         rb.linearVelocity = new Vector2(moveHorizontal * moveSpeed * _speedMultiplier, rb.linearVelocityY);
@@ -103,10 +106,11 @@ public class PlayerMovement : MonoBehaviour
     private void OnLanded()
     {
         if(!fallPointTransform) return;
-        float distance = Vector2.Distance(transform.position, fallPointTransform.position);
+        float distance = fallPointTransform.position.y - transform.position.y;
         if (distance > fallDamageDistance)
         {
             Debug.Log("Took fall damage");
+            playerHPScript.TakeDamage();
         }
         activateOnce = true;
     }

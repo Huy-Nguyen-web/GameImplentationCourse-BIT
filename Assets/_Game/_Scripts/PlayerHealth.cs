@@ -42,10 +42,15 @@ public class PlayerHealth : MonoBehaviour
     {
         if (collision.CompareTag("Enemy") && !isDead)
         {
-            health--;
-            UpdateHealth(health);
-            Debug.Log("tookDamage");
+            TakeDamage();
         }
+    }
+
+    public void TakeDamage()
+    {
+        health--;
+        UpdateHealth(health);
+        Debug.Log("tookDamage");
     }
 
     private void Death()
