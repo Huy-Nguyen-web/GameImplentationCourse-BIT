@@ -4,6 +4,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
     [SerializeField] private Transform groundCheck;
+    [SerializeField] private Transform wallCheck;
     [SerializeField] private LayerMask groundLayer;
     private bool _isFacingRight;
 
@@ -17,7 +18,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
 
-        if(Physics2D.Raycast(groundCheck.position, Vector2.down, 0.5f, groundLayer))
+        if(Physics2D.Raycast(groundCheck.position, Vector2.down, 0.5f, groundLayer) && !Physics2D.Raycast(wallCheck.position, Vector2.right, 0.1f, groundLayer))
         {
             Debug.Log("keep walking");
             //keep walking
@@ -47,5 +48,6 @@ public class Enemy : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(groundCheck.position, groundCheck.position + (Vector3)(Vector2.down * 0.5f));
+        Gizmos.DrawLine(wallCheck.position, wallCheck.position + (Vector3)(Vector2.right * 0.1f));
     }
 }
