@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
 
     [SerializeField] private Transform groundCheck;
-    private SpriteRenderer _sprite;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float jumpForce;
     [SerializeField] private float jumpBufferTime;
@@ -22,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool activateOnce;
 
     private float _speedMultiplier = 1.0f;
+    private SpriteRenderer _sprite;
 
     private PlayerHealth playerHPScript;
 
