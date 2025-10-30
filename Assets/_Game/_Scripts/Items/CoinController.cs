@@ -13,5 +13,7 @@ public class CoinController : MonoBehaviour
         
         PowerUpSystem.Instance.SetPowerUp(powerUp);
         PowerUpSystem.Instance.PerformPowerUp();
+        
+        Destroy(gameObject);
     }
 }

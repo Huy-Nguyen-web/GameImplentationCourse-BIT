@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
 
     [SerializeField] private Transform groundCheck;
-    private SpriteRenderer sprait;
+    private SpriteRenderer _sprite;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float jumpForce;
 
@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        sprait = GetComponentInChildren<SpriteRenderer>();
+        _sprite = GetComponentInChildren<SpriteRenderer>();
         playerHPScript = GetComponent<PlayerHealth>();
         activateOnce = true;
     }
@@ -80,13 +80,13 @@ public class PlayerMovement : MonoBehaviour
         if (rb.linearVelocity.x < 0)
         {
             isFacingRight = false;
-            sprait.flipX = true;
+            _sprite.flipX = true;
         }
 
         if (rb.linearVelocity.x > 0)
         {
             isFacingRight = true;
-            sprait.flipX = false;
+            _sprite.flipX = false;
         }
     }
 

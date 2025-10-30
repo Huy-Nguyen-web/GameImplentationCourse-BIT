@@ -124,7 +124,7 @@ public class DungeonController : Singleton<DungeonController>
         }
     }
 
-    public void PopulateRoom()
+    private void PopulateRoom()
     {
         // Fill up all the room other than the main route
         for (int y = dungeonSize.y - 1; y >= 0; y--)
@@ -145,7 +145,7 @@ public class DungeonController : Singleton<DungeonController>
         }
     }
 
-    public Transform GetPlayerSpawnPoint()
+    private Transform GetPlayerSpawnPoint()
     {
         return _startRoom.GetPlayerSpawnPoint();
     }
