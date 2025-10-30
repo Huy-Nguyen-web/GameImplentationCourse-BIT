@@ -52,7 +52,7 @@ public class PlayerAttack : MonoBehaviour
                 Instantiate(attackHitbox, attackZoneLeft.position, Quaternion.identity);
             }
 
-            recoveryTime = 1f;
+            recoveryTime = 0.5f;
             anim.SetTrigger("Attack");
         
     }
