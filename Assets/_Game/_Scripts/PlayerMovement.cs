@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer _sprite;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float jumpForce;
+    [SerializeField] private float jumpBufferTime;
+    [SerializeField] private float coyoteTime;
 
     [SerializeField] private Animator anim;
 
@@ -49,19 +51,30 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("Move", false);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && coyoteTime > 0)
         {
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            anim.SetTrigger("Jump");
+            Jump();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && coyoteTime <= 0)
+        {
+            jumpBufferTime = 0.1f;
+        }
+
+        if (jumpBufferTime > 0 && coyoteTime > 0)
+        {
+            Jump();
         }
 
         if (isGrounded)
         {
             anim.SetBool("Grounded", true);
+            coyoteTime = 0.1f;
         }
         else
         {
             anim.SetBool("Grounded", false);
+            coyoteTime -= 1 * Time.deltaTime;
         }
 
         if(!isGrounded && activateOnce)
@@ -73,6 +86,18 @@ public class PlayerMovement : MonoBehaviour
         {
             OnLanded();
         }
+
+        if(coyoteTime < 0)
+        {
+            coyoteTime = 0;
+        }
+
+        if(jumpBufferTime >= 0)
+        {
+            jumpBufferTime -= 1 * Time.deltaTime;
+        }
+
+        
     }
 
     private void FixedUpdate()
@@ -113,6 +138,13 @@ public class PlayerMovement : MonoBehaviour
             playerHPScript.TakeDamage();
         }
         activateOnce = true;
+    }
+
+    private void Jump()
+    {
+        jumpBufferTime = 0;
+        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        anim.SetTrigger("Jump");
     }
     
     #region Events

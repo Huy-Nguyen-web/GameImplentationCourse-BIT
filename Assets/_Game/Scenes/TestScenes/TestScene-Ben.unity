@@ -751,90 +751,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 928103415548310771, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
-      propertyPath: orthographic size
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 928103415548310771, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0.17181382
-      objectReference: {fileID: 0}
-    - target: {fileID: 928103415548310771, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0.21972689
-      objectReference: {fileID: 0}
-    - target: {fileID: 928103415548310771, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0.254717
-      objectReference: {fileID: 0}
-    - target: {fileID: 1115310076853351111, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1428798759346624692, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2834460682920121252, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 5.3333335
-      objectReference: {fileID: 0}
-    - target: {fileID: 2834460682920121252, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.13
-      objectReference: {fileID: 0}
-    - target: {fileID: 2834460682920121252, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
-      propertyPath: hpBar
-      value: 
-      objectReference: {fileID: 124378464}
-    - target: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
-      propertyPath: healthChangeEventChannel
-      value: 
-      objectReference: {fileID: 11400000, guid: 884418740f7eb7b429db2eca4ce5b996, type: 2}
-    - target: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
-      propertyPath: gainHpEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
-      propertyPath: gainHpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
-      propertyPath: gainHpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 3892151214683798231}
-    - target: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
-      propertyPath: gainHpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
-      propertyPath: gainHpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GainHeath
-      objectReference: {fileID: 0}
-    - target: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
-      propertyPath: gainHpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PlayerHealth, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
-      propertyPath: gainHpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 4369901561734441179, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
-      propertyPath: fallDamageDistance
-      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4369901561734441179, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
       propertyPath: fallPointTransform
       value: 
       objectReference: {fileID: 31654259}
-    - target: {fileID: 4830254998832909538, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8439165499170983573, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -878,10 +802,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 988212371966556678, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2834460683768659117}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
 --- !u!1 &2009173991
 GameObject:
@@ -1023,54 +944,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45711178d22a8594ea066cc7d33092bf, type: 3}
---- !u!1 &988212373533938958 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 988212371966556678, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
-  m_PrefabInstance: {fileID: 1586802440}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2834460683768659117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 988212373533938958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowDebugText: 0
-  ShowCameraFrustum: 1
-  IgnoreTimeScale: 0
-  WorldUpOverride: {fileID: 0}
-  ChannelMask: -1
-  UpdateMethod: 2
-  BlendUpdateMethod: 1
-  LensModeOverride:
-    Enabled: 0
-    DefaultMode: 2
-  DefaultBlend:
-    Style: 1
-    Time: 2
-    CustomCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  CustomBlends: {fileID: 0}
---- !u!114 &3892151214683798231 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3892151216200848863, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
-  m_PrefabInstance: {fileID: 1586802440}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 514a4b987838012448a4b2c5b5825866, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
