@@ -93,6 +93,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerUp: {fileID: 11400000, guid: 51c9daa9bcde9d04986ec110c38dfec3, type: 2}
+  coinSprite: {fileID: 705931198510628879}
+  animationTime: 0.6
 --- !u!1 &6802059157047201638
 GameObject:
   m_ObjectHideFlags: 0
