@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    [Header("Serialized stuff")]
+    [Tooltip("How much delay when you can attack again")]
     [SerializeField] private float recoveryTime;
     [SerializeField] private Transform attackZoneRight;
     [SerializeField] private Transform attackZoneLeft;
@@ -40,9 +42,9 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    [ContextMenu("PlayerAttack")]
     private void Attack()
     {
-        
             if (movementScript.isFacingRight)
             {
                 Instantiate(attackHitbox, attackZoneRight.position, Quaternion.identity);
@@ -54,7 +56,6 @@ public class PlayerAttack : MonoBehaviour
 
             recoveryTime = 0.5f;
             anim.SetTrigger("Attack");
-        
     }
 
     private void Heal()

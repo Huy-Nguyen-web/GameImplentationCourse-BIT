@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         float camY = Input.GetAxisRaw("Vertical") * cameraLookDistance;
         Vector3 camPos = new Vector3(0, camY, 0);
