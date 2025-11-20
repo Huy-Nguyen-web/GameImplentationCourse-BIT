@@ -1,16 +1,18 @@
 using UnityEngine;
+using UnityEngine.Events;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private DungeonController dungeonController;
 
-    // Update is called once per frame
-    void Update()
+    public UnityAction<bool> onPlayerAtDoor;
+
+    public int level;
+
+    public void GoToNextLevel()
     {
-        
+        level++;
+        dungeonController.ResetDungeon();
+        onPlayerAtDoor?.Invoke(false);
     }
 }

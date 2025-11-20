@@ -11,7 +11,6 @@ using UnityEngine.Events;
 public abstract class BaseEventChannelSO<T> : ScriptableObject where T : EventContext
 {
     public UnityAction<T?>? OnEventRaised;
-    public UnityAction<BaseEventChannelSO<T>>? OnFindEventRaised;
     
     public void RaiseEvent(T? context)
     {
@@ -23,11 +22,6 @@ public abstract class BaseEventChannelSO<T> : ScriptableObject where T : EventCo
         OnEventRaised?.Invoke(null);
     }
 
-    [Button]
-    public void FindEventChannelListener()
-    {
-        OnFindEventRaised?.Invoke(this);
-    }
 }
 
 /// <summary>
@@ -35,23 +29,15 @@ public abstract class BaseEventChannelSO<T> : ScriptableObject where T : EventCo
 /// </summary>
 /// <typeparam name="TEventChannel">Event Channel SO</typeparam>
 /// <typeparam name="TEventContext">Event Context</typeparam>
-[ExecuteAlways]
 public abstract class BaseEventChannelListener<TEventChannel, TEventContext> : MonoBehaviour
     where TEventChannel : BaseEventChannelSO<TEventContext> where TEventContext : EventContext
 {
     [SerializeField] protected TEventChannel eventChannel;
     [SerializeField] protected UnityEvent<TEventContext> onResponse;
 
-    protected void Awake()
-    {
-        if (eventChannel == null) return;
-        eventChannel.OnFindEventRaised += OnFindEventRaised;
-    }
-
     protected void Destroy()
     {
         if (eventChannel == null) return;
-        eventChannel.OnFindEventRaised = null;
     }
 
     protected virtual void OnEnable()
@@ -70,14 +56,6 @@ public abstract class BaseEventChannelListener<TEventChannel, TEventContext> : M
     {
         onResponse?.Invoke(ctx);
     }
-    
-#if UNITY_EDITOR
-    private void OnFindEventRaised(BaseEventChannelSO<TEventContext> arg0)
-    {
-        Debug.Log($"{nameof(OnFindEventRaised)}: {arg0}", transform);
-        EditorGUIUtility.PingObject(transform);
-    }
-#endif
 }
 
 /// <summary>

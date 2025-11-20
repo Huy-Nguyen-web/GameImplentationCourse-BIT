@@ -145,6 +145,28 @@ public class DungeonController : Singleton<DungeonController>
         }
     }
 
+    private void DestroyAllRoom()
+    {
+        for(int i = 0; i < dungeonSize.x; i++)
+        {
+            for (int j = 0; j < dungeonSize.y; j++)
+            {
+                if (_rooms[i, j] != null)
+                {
+                    Destroy(_rooms[i, j].gameObject);
+                }
+                _rooms[i, j] = null;
+            }
+        }
+    }
+
+    public void ResetDungeon()
+    {
+        DestroyAllRoom();
+        GenerateRoom();
+        PopulateRoom();
+    }
+
     private Transform GetPlayerSpawnPoint()
     {
         return _startRoom.GetPlayerSpawnPoint();

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -25,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerHealth playerHPScript;
 
+    private bool _playerAtDoor = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -32,7 +35,11 @@ public class PlayerMovement : MonoBehaviour
         _sprite = GetComponentInChildren<SpriteRenderer>();
         playerHPScript = GetComponent<PlayerHealth>();
         activateOnce = true;
+
+        GameManager.Instance.onPlayerAtDoor += OnPlayerAtDoor;
     }
+
+
 
     private void Update()
     {
@@ -60,6 +67,12 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpBufferTime = 0.1f;
         }
+
+        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && _playerAtDoor)
+        {
+            GameManager.Instance.GoToNextLevel();
+        }
+
 
         if (jumpBufferTime > 0 && coyoteTime > 0)
         {
@@ -157,6 +170,11 @@ public class PlayerMovement : MonoBehaviour
             powerUpTrigger = (bool)ctx.Data[0];
         }
         _speedMultiplier = (powerUpTrigger) ? 2.0f : 1.0f;
+    }
+
+    private void OnPlayerAtDoor(bool atDoor)
+    {
+        _playerAtDoor = atDoor;
     }
     #endregion
 }

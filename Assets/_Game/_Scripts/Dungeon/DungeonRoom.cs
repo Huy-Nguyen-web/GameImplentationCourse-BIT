@@ -199,7 +199,8 @@ public class DungeonRoom : MonoBehaviour
     public void SpawnDoor()
     {
         Vector3 offset = new Vector3(0.25f, -0.125f, 0f);
-        Instantiate(doorPrefab, doorSpawnPoint.transform.position + offset, Quaternion.identity);
+        var door = Instantiate(doorPrefab, doorSpawnPoint.transform.position + offset, Quaternion.identity);
+        door.transform.SetParent(doorSpawnPoint);
     }
     
     public Vector2Int GetRoomPos() => _roomPos;
