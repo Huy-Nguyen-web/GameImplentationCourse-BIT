@@ -16,6 +16,7 @@ public class PlayerAttack : MonoBehaviour
     private PlayerMovement movementScript;
 
     [SerializeField] private Animator anim;
+    [SerializeField] private AudioSource attackSound;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -56,6 +57,7 @@ public class PlayerAttack : MonoBehaviour
 
             recoveryTime = 0.5f;
             anim.SetTrigger("Attack");
+        attackSound.Play();
     }
 
     private void Heal()

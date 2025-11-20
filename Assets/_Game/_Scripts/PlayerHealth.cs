@@ -21,6 +21,8 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] private GenericEventChannelSO healthChangeEventChannel;
 
+    [SerializeField] private AudioSource damageSound;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -51,6 +53,7 @@ public class PlayerHealth : MonoBehaviour
         health--;
         UpdateHealth(health);
         Debug.Log("tookDamage");
+        damageSound.Play();
     }
 
     private void Death()
