@@ -1,4 +1,5 @@
 using System.Numerics;
+using GameSystem.Juice;
 using GameSystem.Juice.GeneralJuices;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
@@ -6,22 +7,27 @@ using Vector3 = UnityEngine.Vector3;
 
 public class Enemy : MonoBehaviour
 {
+    public bool CanAttake { get; private set; } = true;
+    
     [SerializeField] private float moveSpeed;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform wallCheck;
     [SerializeField] private LayerMask groundLayer;
     
     [Header("Juice")]
-    [SerializeField] private ShakeJuice shake;
+    [SerializeField] private GameJuiceCombiner juice;
     private bool _isFacingRight;
     private Vector2 velocity;
 
     private bool _isOnGround;
-
     
     void Start()
     {
         _isFacingRight = true;
+        juice.OnComplete.AddListener(() =>
+        {
+            Destroy(gameObject);
+        });
     }
 
     // Update is called once per frame
@@ -60,12 +66,8 @@ public class Enemy : MonoBehaviour
         {
             // Play the juice
             // When the juice done, destroy object
-            shake.Play();
-            shake.OnComplete.AddListener(() =>
-            {
-                Debug.Log("On complete");
-                Destroy(gameObject);
-            });
+            CanAttake = false;
+            juice.Play();
         }
     }
 

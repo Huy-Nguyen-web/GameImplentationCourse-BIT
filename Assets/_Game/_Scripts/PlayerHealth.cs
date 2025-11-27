@@ -44,6 +44,8 @@ public class PlayerHealth : MonoBehaviour
     {
         if (collision.CompareTag("Enemy") && !isDead)
         {
+            if (!collision.TryGetComponent<Enemy>(out var _enemy)) return;
+            if (!_enemy.CanAttake) return;
             TakeDamage();
         }
     }
@@ -52,7 +54,6 @@ public class PlayerHealth : MonoBehaviour
     {
         health--;
         UpdateHealth(health);
-        Debug.Log("tookDamage");
         damageSound.Play();
     }
 

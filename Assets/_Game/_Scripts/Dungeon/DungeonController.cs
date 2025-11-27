@@ -36,7 +36,6 @@ public class DungeonController : Singleton<DungeonController>
     {
         DungeonRoom room = Instantiate(roomPrefabs[Random.Range(0, roomPrefabs.Length)], transform);
         room.transform.position = ((Vector2)room.GetRoomSize() - Vector2.one) * position;
-        Debug.Log($"Spawn room at {position}");
         return room;
     }
 
@@ -139,7 +138,6 @@ public class DungeonController : Singleton<DungeonController>
                     if(y == 0) _rooms[x, y].CloseDoor(DungeonRoom.DoorType.Bottom);
                     if(x == dungeonSize.x - 1) _rooms[x, y].CloseDoor(DungeonRoom.DoorType.Right);
                     if(x == 0) _rooms[x, y].CloseDoor(DungeonRoom.DoorType.Left);
-                    Debug.Log($"Populate room at {new Vector2Int(x, y)}");
                 }
             }
         }

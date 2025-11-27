@@ -147,7 +147,6 @@ public class PlayerMovement : MonoBehaviour
         float distance = fallPointTransform.position.y - transform.position.y;
         if (distance > fallDamageDistance)
         {
-            Debug.Log("Took fall damage");
             playerHPScript.TakeDamage();
         }
         activateOnce = true;
