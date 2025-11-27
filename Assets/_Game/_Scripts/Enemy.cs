@@ -1,4 +1,5 @@
 using System.Numerics;
+using GameSystem.Juice.GeneralJuices;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -9,6 +10,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform wallCheck;
     [SerializeField] private LayerMask groundLayer;
+    
+    [Header("Juice")]
+    [SerializeField] private ShakeJuice shake;
     private bool _isFacingRight;
     private Vector2 velocity;
 
@@ -30,7 +34,6 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-           
             _isFacingRight = !_isFacingRight;
             var localScale = transform.localScale;
             localScale.x = (_isFacingRight) ? 1f : -1f;
@@ -55,7 +58,14 @@ public class Enemy : MonoBehaviour
     {
         if (collision.CompareTag("PlayerAttack"))
         {
-            Destroy(gameObject);
+            // Play the juice
+            // When the juice done, destroy object
+            shake.Play();
+            shake.OnComplete.AddListener(() =>
+            {
+                Debug.Log("On complete");
+                Destroy(gameObject);
+            });
         }
     }
 

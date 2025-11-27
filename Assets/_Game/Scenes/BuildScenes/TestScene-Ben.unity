@@ -943,7 +943,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834460682920121252, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.226414
+      value: 6.2214627
       objectReference: {fileID: 0}
     - target: {fileID: 4369901561734441179, guid: d899023d4cce2ce43b3e960fb6478f33, type: 3}
       propertyPath: fallPointTransform

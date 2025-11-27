@@ -161,6 +161,8 @@ GameObject:
   - component: {fileID: 8173870760943058725}
   - component: {fileID: 2282215694365410137}
   - component: {fileID: 8610070320242772581}
+  - component: {fileID: 1259716199080369900}
+  - component: {fileID: 3900817507016875595}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -204,6 +206,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  shake: {fileID: 1259716199080369900}
 --- !u!50 &2282215694365410137
 Rigidbody2D:
   serializedVersion: 5
@@ -277,3 +280,35 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1259716199080369900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3735966752295193793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21673da4b8c2c1bf5882285fba3ede8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 6174597784405897538}
+  OnComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  shakeDuration: 0.3
+--- !u!114 &3900817507016875595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3735966752295193793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 603e1f66241a31b199dcbbdab7d3c724, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameJuices:
+  - {fileID: 1259716199080369900}
+  combinerType: 0
