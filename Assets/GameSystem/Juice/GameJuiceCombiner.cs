@@ -15,7 +15,7 @@ namespace GameSystem.Juice
             Parallel,
         }
 
-        public UnityAction OnComplete;
+        public UnityEvent OnComplete;
         [SerializeField] private List<BaseGameJuice> gameJuices = new ();
         [SerializeField] private CombinerType combinerType = CombinerType.Sequence;
         
@@ -51,6 +51,10 @@ namespace GameSystem.Juice
                         break;
                 }
             }
+            _sequence.OnComplete(() =>
+            {
+                OnComplete?.Invoke();
+            });
         }
 
         #if UNITY_EDITOR

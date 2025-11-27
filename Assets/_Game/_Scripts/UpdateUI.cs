@@ -10,7 +10,6 @@ public class UpdateUI : MonoBehaviour
     {
         if (ctx != null)
         {
-            Debug.Log($"player health: {(int)ctx.Data[0]}");
             healthBar.value = (int)ctx.Data[0];
         }
     } 

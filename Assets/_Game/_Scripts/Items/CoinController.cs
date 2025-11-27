@@ -12,6 +12,13 @@ public class CoinController : MonoBehaviour
     [SerializeField] private SpriteRenderer coinSprite;
     [SerializeField, Range(0.5f, 3f)] private float animationTime;
     
+    private Sequence _sequence;
+
+    private void Start()
+    {
+        SetupSequence();
+    }
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (powerUp == null) return;
@@ -20,13 +27,18 @@ public class CoinController : MonoBehaviour
         PowerUpSystem.Instance.SetPowerUp(powerUp);
         PowerUpSystem.Instance.PerformPowerUp();
 
-        Sequence sequence = DOTween.Sequence();
-        sequence.SetEase(Ease.InOutSine);
+        _sequence.Play();
+    }
+
+    private void SetupSequence()
+    {
+        _sequence = DOTween.Sequence();
+        _sequence.SetEase(Ease.InOutSine);
         
-        sequence.Append(transform.DOLocalMoveY(0.5f, animationTime));
-        sequence.Join(transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), animationTime));
-        sequence.Join(coinSprite.DOFade(0f, animationTime));
+        _sequence.Append(transform.DOLocalMoveY(0.5f, animationTime));
+        _sequence.Join(transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), animationTime));
+        _sequence.Join(coinSprite.DOFade(0f, animationTime));
         
-        sequence.OnComplete(() => Destroy(gameObject));
+        _sequence.OnComplete(() => Destroy(gameObject));
     }
 }

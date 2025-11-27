@@ -94,7 +94,6 @@ public class DungeonRoom : MonoBehaviour
     public void Init(Vector2Int roomPos)
     {
         _roomPos = roomPos;
-        Debug.Log($"Enemy Spawn Chance {enemySpawnChance}");
         OpenRandomDoor(3);
         SpawnRandomEnemy();
         SpawnRandomCoin();
@@ -154,10 +153,8 @@ public class DungeonRoom : MonoBehaviour
         for (int i = 0; i < enemySpawnPoints.Length; i++)
         {
             float randomChance = Random.Range(0f, 1f);
-            Debug.Log(randomChance);
             if (randomChance < enemySpawnChance)
             {
-                Debug.Log("Spawn enemy");
                 var enemy = Instantiate(enemyPrefab, enemySpawnPoints[i].position, Quaternion.identity, enemySpawnPoints[i].transform);
                 _enemies.Add(enemy);
             }

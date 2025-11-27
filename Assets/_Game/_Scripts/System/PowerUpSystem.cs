@@ -23,10 +23,8 @@ namespace _Game._Scripts.System
 
         public void SetPowerUp(BasePowerUp powerUp)
         {
-            Debug.Log("Did it go here?");
             if (powerUp == null) return;
             StopPowerUp();
-            Debug.Log("Set power up");
             _currentPowerUp = powerUp;
         }
         

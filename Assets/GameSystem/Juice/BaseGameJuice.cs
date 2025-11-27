@@ -5,15 +5,19 @@ using UnityEngine.Events;
 
 namespace GameSystem.Juice
 {
-    [ExecuteInEditMode]
     public abstract class BaseGameJuice : MonoBehaviour
     {
         public Transform Target;
         public UnityEvent OnComplete;
         
+        [SerializeField, Range(0f, 5f)] protected float duration;
+        
         protected Tween CurrentTween;
 
-        public abstract void Play();
+        public virtual void Play()
+        {
+            CurrentTween?.Play();
+        }
         
         public Tween GetTween() => CurrentTween;
         

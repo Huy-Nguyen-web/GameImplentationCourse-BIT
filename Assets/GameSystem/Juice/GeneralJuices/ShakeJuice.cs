@@ -6,26 +6,10 @@ namespace GameSystem.Juice.GeneralJuices
 {
     public class ShakeJuice : BaseGameJuice
     {
-        [SerializeField] private float shakeDuration;
-        
         private void Awake()
         {
-            CurrentTween = Target.DOShakeScale(shakeDuration, 1.1f).OnComplete(() => OnComplete?.Invoke());
+            CurrentTween = Target.DOShakeScale(duration, 1.1f);
+            CurrentTween.OnComplete(() => OnComplete?.Invoke());
         }
-        
-        public override void Play()
-        {
-            Debug.Log("Play Tween");
-            CurrentTween.Play();;
-        }
-        
-        #if UNITY_EDITOR
-        [Button]
-        public void PlayInEditor()
-        {
-            CurrentTween ??= Target.DOShakeScale(shakeDuration, 1.1f).OnComplete(() => OnComplete?.Invoke());
-        }
-        #endif
-
     }
 }
