@@ -29,7 +29,7 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C) && recoveryTime <= 0)
+        if (Input.GetKeyDown(KeyCode.J) && recoveryTime <= 0)
         {
             playerAction?.Invoke();
             playerHealth.UpdateHealth(OnPlayerUpdateHealth);
