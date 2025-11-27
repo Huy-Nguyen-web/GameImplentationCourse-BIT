@@ -51,7 +51,7 @@ namespace GameSystem.Juice
                         break;
                 }
             }
-            _sequence.OnComplete(() =>
+            _sequence.AppendCallback(() =>
             {
                 OnComplete?.Invoke();
             });
