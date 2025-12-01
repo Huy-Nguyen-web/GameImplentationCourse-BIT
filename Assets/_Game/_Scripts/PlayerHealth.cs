@@ -1,5 +1,6 @@
 using EditorAttributes;
 using System;
+using System.Collections;
 using System.Diagnostics.Tracing;
 using UnityEngine;
 using UnityEngine.Events;
@@ -22,6 +23,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private GenericEventChannelSO healthChangeEventChannel;
 
     [SerializeField] private AudioSource damageSound;
+
+    [SerializeField] private GameObject gameOverPanel;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -63,6 +66,7 @@ public class PlayerHealth : MonoBehaviour
         movementScript.enabled = false;
         rb.linearVelocity = new Vector2(0, 0);
         anim.SetTrigger("Dead");
+        StartCoroutine(DeathDelay());
     }
 
     [Button]
@@ -85,6 +89,12 @@ public class PlayerHealth : MonoBehaviour
     public void UpdateHealth(Action<int> action)
     {
         action?.Invoke(health);
+    }
+
+    IEnumerator DeathDelay()
+    {
+        yield return new WaitForSeconds(2f);
+        gameOverPanel.SetActive(true);
     }
 
     public int CheckHealth() => health;

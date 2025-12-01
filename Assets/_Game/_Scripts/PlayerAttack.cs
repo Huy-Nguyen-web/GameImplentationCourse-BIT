@@ -31,8 +31,9 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.J) && recoveryTime <= 0)
         {
-            playerAction?.Invoke();
-            playerHealth.UpdateHealth(OnPlayerUpdateHealth);
+            //playerAction?.Invoke();
+            //playerHealth.UpdateHealth(OnPlayerUpdateHealth);
+            Attack();
         }
 
         if (recoveryTime > 0)

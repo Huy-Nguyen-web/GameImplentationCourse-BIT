@@ -11,6 +11,7 @@ public class CoinController : MonoBehaviour
     [SerializeField] private BasePowerUp powerUp;
     [SerializeField] private SpriteRenderer coinSprite;
     [SerializeField, Range(0.5f, 3f)] private float animationTime;
+    [SerializeField] private AudioSource pickupSound;
     
     private Sequence _sequence;
 
@@ -26,6 +27,8 @@ public class CoinController : MonoBehaviour
         
         PowerUpSystem.Instance.SetPowerUp(powerUp);
         PowerUpSystem.Instance.PerformPowerUp();
+
+        pickupSound.Play();
 
         _sequence.Play();
     }
