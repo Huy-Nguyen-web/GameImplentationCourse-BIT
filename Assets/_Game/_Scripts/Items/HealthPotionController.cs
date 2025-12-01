@@ -7,6 +7,7 @@ public class HealthPotionController : MonoBehaviour
     [SerializeField] private BasePowerUp powerUp;
     [SerializeField] private SpriteRenderer healthSprite;
     [SerializeField, Range(0.5f, 3f)] private float animationTime;
+    [SerializeField] private AudioSource pickupSound;
 
     private Sequence _sequence;
 
@@ -22,6 +23,8 @@ public class HealthPotionController : MonoBehaviour
         
         PowerUpSystem.Instance.SetPowerUp(powerUp);
         PowerUpSystem.Instance.PerformPowerUp();
+
+        pickupSound.Play();
 
         _sequence.Play();
     }
