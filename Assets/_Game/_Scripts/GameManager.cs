@@ -11,6 +11,7 @@ public class GameManager : Singleton<GameManager>
     [Header("UI")]
     [SerializeField] private Animator transitionAnimator;
     [SerializeField] private InGameUI inGameUI;
+    [SerializeField] private AudioSource transitionSound;
 
     public bool IsTransition { get; set; } = false;
     public UnityAction<bool> onPlayerAtDoor;
@@ -27,6 +28,7 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("Did it go here?");
         IsTransition = true;
         transitionAnimator.Play("Fade");
+        transitionSound.Play();
         yield return new WaitForSeconds(0.5f);
         IsTransition = false;
         level++;
