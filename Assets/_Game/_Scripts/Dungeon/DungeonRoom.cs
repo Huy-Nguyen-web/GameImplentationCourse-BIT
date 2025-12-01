@@ -12,7 +12,7 @@ public class DungeonRoom : MonoBehaviour
     [SerializeField] private GameObject roomPrefab;
     [SerializedDictionary] public SerializedDictionary<DoorType, GameObject> doorsDictionary = new ();
     [SerializeField] private Transform enemyPrefab; // Change this one to Enemy type later
-    [SerializeField] private Transform coinPrefab; // Change this one to Coin type later
+    [SerializeField] private Transform[] powerUpPrefabs; // Change this one to Coin type later
     [SerializeField] private Transform doorPrefab;
 
     [Header("Spawn Points")] 
@@ -171,27 +171,13 @@ public class DungeonRoom : MonoBehaviour
             float randomChance = Random.Range(0f, 1f);
             if (randomChance < coinSpawnChance)
             {
-                var coin = Instantiate(coinPrefab, coinSpawnPoints[i].position, Quaternion.identity, coinSpawnPoints[i].transform);
+                var powerUpPrefab = powerUpPrefabs[Random.Range(0, powerUpPrefabs.Length)];
+                var coin = Instantiate(powerUpPrefab, coinSpawnPoints[i].position, Quaternion.identity, coinSpawnPoints[i].transform);
                 _coins.Add(coin);
             }
         }
     }
 
-    /// <summary>
-    /// Spawn random coin in the room
-    /// </summary>
-    private void SpawnRandomCoins()
-    {
-        for (int i = 0; i < coinSpawnPoints.Length; i++)
-        {
-            float randomChance = Random.Range(0f, 1f);
-            if (randomChance > coinSpawnChance)
-            {
-                var coin = Instantiate(coinPrefab, transform);
-                _coins.Add(coin);
-            }
-        }
-    }
 
     public void SpawnDoor()
     {

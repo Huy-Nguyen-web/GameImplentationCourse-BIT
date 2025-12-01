@@ -1499,7 +1499,10 @@ MonoBehaviour:
   doorsDictionary:
     _serializedList: []
   enemyPrefab: {fileID: 0}
-  coinPrefab: {fileID: 0}
+  powerUpPrefabs:
+  - {fileID: 1922886326151687497, guid: e4f6a62e39fef974aa6fb44c5a3d339e, type: 3}
+  - {fileID: 6545977528538402550, guid: 74b75b9cab1050649aba7ee8302802b9, type: 3}
+  doorPrefab: {fileID: 0}
   playerSpawnPoint: {fileID: 0}
   enemySpawnPoints: []
   coinSpawnPoints: []
