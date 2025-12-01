@@ -1782,7 +1782,9 @@ MonoBehaviour:
     - Key: 3
       Value: {fileID: 1071666559545876099}
   enemyPrefab: {fileID: 6174597784405897538, guid: 4f7d96cd2f1eb63448f2fb99cdfd88c9, type: 3}
-  coinPrefab: {fileID: 1922886326151687497, guid: e4f6a62e39fef974aa6fb44c5a3d339e, type: 3}
+  powerUpPrefabs:
+  - {fileID: 1922886326151687497, guid: e4f6a62e39fef974aa6fb44c5a3d339e, type: 3}
+  - {fileID: 6545977528538402550, guid: 74b75b9cab1050649aba7ee8302802b9, type: 3}
   doorPrefab: {fileID: 732221428757863048, guid: 69406db8bf7776643a5e12f1ba26ced1, type: 3}
   playerSpawnPoint: {fileID: 7542089504165732889}
   enemySpawnPoints:

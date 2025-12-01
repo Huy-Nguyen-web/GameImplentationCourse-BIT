@@ -1,9 +1,8 @@
 using EditorAttributes;
 using System;
-using System.Diagnostics.Tracing;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -68,7 +67,9 @@ public class PlayerHealth : MonoBehaviour
     [Button]
     public void GainHeath()
     {
-        health = maxHealth;
+        health += (Random.Range(-1, 2) * 2);
+        health = Math.Clamp(health, 0, maxHealth);
+        UpdateHealth(health);
         gainHpEvent?.Invoke();
     }
 

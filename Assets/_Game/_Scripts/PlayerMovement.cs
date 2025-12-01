@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!_playerCanMove) return;
+        if (GameManager.Instance.IsTransition) return;
 
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
 
@@ -77,7 +77,8 @@ public class PlayerMovement : MonoBehaviour
 
         if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && _playerAtDoor)
         {
-            StartCoroutine(FadeTime());
+            // StartCoroutine(FadeTime());
+            GameManager.Instance.GoToNextLevel();
         }
 
 
@@ -166,14 +167,14 @@ public class PlayerMovement : MonoBehaviour
         anim.SetTrigger("Jump");
     }
 
-    private IEnumerator FadeTime()
-    {
-        fadeBlackAnim.Play("Fade");
-        _playerCanMove = false;   
-        yield return new WaitForSeconds(0.5f);
-        _playerCanMove = true;
-        GameManager.Instance.GoToNextLevel();
-    }
+    // private IEnumerator FadeTime()
+    // {
+    //     fadeBlackAnim.Play("Fade");
+    //     _playerCanMove = false;   
+    //     yield return new WaitForSeconds(0.5f);
+    //     _playerCanMove = true;
+    //     GameManager.Instance.GoToNextLevel();
+    // }
     
     #region Events
 
