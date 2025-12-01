@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -16,6 +17,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float coyoteTime;
 
     [SerializeField] private Animator anim;
+    private readonly int isMovingHash = Animator.StringToHash(name: "Move");
+
+    [SerializeField] private Animator fadeBlackAnim;
 
     [SerializeField] private Transform fallPointTransform;
     [SerializeField] private float fallDamageDistance;
@@ -27,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerHealth playerHPScript;
 
     private bool _playerAtDoor = false;
+    private bool _playerCanMove = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -43,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (!_playerCanMove) return;
+
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
 
         rb.linearVelocity = new Vector2(moveHorizontal * moveSpeed * _speedMultiplier, rb.linearVelocityY);
@@ -51,11 +58,11 @@ public class PlayerMovement : MonoBehaviour
 
         if(moveHorizontal != 0)
         {
-            anim.SetBool("Move", true);
+            anim.SetBool(isMovingHash, true);
         }
         else
         {
-            anim.SetBool("Move", false);
+            anim.SetBool(isMovingHash, false);
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && coyoteTime > 0)
@@ -70,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
 
         if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && _playerAtDoor)
         {
-            GameManager.Instance.GoToNextLevel();
+            StartCoroutine(FadeTime());
         }
 
 
@@ -157,6 +164,15 @@ public class PlayerMovement : MonoBehaviour
         jumpBufferTime = 0;
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         anim.SetTrigger("Jump");
+    }
+
+    private IEnumerator FadeTime()
+    {
+        fadeBlackAnim.Play("Fade");
+        _playerCanMove = false;   
+        yield return new WaitForSeconds(0.5f);
+        _playerCanMove = true;
+        GameManager.Instance.GoToNextLevel();
     }
     
     #region Events
