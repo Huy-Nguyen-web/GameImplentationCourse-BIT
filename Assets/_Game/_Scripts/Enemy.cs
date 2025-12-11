@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform wallCheck;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private AudioSource deathSound;
     
     [Header("Juice")]
     [SerializeField] private GameJuiceCombiner juice;
@@ -66,6 +67,7 @@ public class Enemy : MonoBehaviour
         {
             // Play the juice
             // When the juice done, destroy object
+            deathSound.Play();
             CanAttake = false;
             juice.Play();
         }

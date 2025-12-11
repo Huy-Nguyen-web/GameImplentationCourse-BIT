@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform fallPointTransform;
     [SerializeField] private float fallDamageDistance;
     [SerializeField] private bool activateOnce;
+    [SerializeField] private AudioSource jumpSound;
 
     private float _speedMultiplier = 1.0f;
     private SpriteRenderer _sprite;
@@ -162,9 +163,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        jumpBufferTime = 0;
+        rb.linearVelocityY = 0;
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        jumpSound.Play();
+        jumpBufferTime = 0;
         anim.SetTrigger("Jump");
+        //rb.gravityScale = 3;
     }
 
     // private IEnumerator FadeTime()
