@@ -67,7 +67,7 @@ public class PlayerHealth : MonoBehaviour
     [Button]
     public void GainHeath()
     {
-        health += (Random.Range(-1, 2) * 2);
+        health += (Random.Range(-1, 2) * 2 + 1);
         health = Math.Clamp(health, 0, maxHealth);
         UpdateHealth(health);
         gainHpEvent?.Invoke();

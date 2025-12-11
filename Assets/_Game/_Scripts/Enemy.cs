@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         _isFacingRight = true;
-        juice.OnComplete.AddListener(() =>
+        juice.onComplete.AddListener(() =>
         {
             Destroy(gameObject);
         });

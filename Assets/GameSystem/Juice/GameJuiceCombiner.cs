@@ -9,13 +9,13 @@ namespace GameSystem.Juice
 {
     public class GameJuiceCombiner : MonoBehaviour
     {
-        public enum CombinerType
+        private enum CombinerType
         {
             Sequence,
             Parallel,
         }
 
-        public UnityEvent OnComplete;
+        public UnityEvent onComplete;
         [SerializeField] private List<BaseGameJuice> gameJuices = new ();
         [SerializeField] private CombinerType combinerType = CombinerType.Sequence;
         
@@ -47,13 +47,11 @@ namespace GameSystem.Juice
                     case CombinerType.Parallel:
                         _sequence.Join(gameJuices[i].GetTween());
                         break;
-                    default:
-                        break;
                 }
             }
             _sequence.AppendCallback(() =>
             {
-                OnComplete?.Invoke();
+                onComplete?.Invoke();
             });
         }
 
