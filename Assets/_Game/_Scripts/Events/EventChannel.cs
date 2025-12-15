@@ -1,6 +1,4 @@
 #nullable enable
-using EditorAttributes;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -21,7 +19,6 @@ public abstract class BaseEventChannelSO<T> : ScriptableObject where T : EventCo
     {
         OnEventRaised?.Invoke(null);
     }
-
 }
 
 /// <summary>
